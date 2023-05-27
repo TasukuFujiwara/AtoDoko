@@ -8,17 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		5BBD0F7F2A1890D100CF29EB /* AtoDokoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F7E2A1890D100CF29EB /* AtoDokoApp.swift */; };
-		5BBD0F812A1890D100CF29EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F802A1890D100CF29EB /* ContentView.swift */; };
+		5BBD0F812A1890D100CF29EB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F802A1890D100CF29EB /* MainView.swift */; };
 		5BBD0F832A1890D300CF29EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD0F822A1890D300CF29EB /* Assets.xcassets */; };
 		5BBD0F862A1890D300CF29EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD0F852A1890D300CF29EB /* Preview Assets.xcassets */; };
+		5BBD0F8D2A19B5E800CF29EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBD0F8C2A19B5E800CF29EB /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		5BBD0F902A19B82600CF29EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */; };
+		5BBD0F922A19D72F00CF29EB /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */; };
+		5BBD0F942A19DA2A00CF29EB /* MapUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */; };
+		5BBD0F962A19FCF300CF29EB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F952A19FCF300CF29EB /* LocationManager.swift */; };
+		D518B7757F455E1D168464F7 /* libPods-AtoDoko.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0903A5B3E1D9C50C6F91A487 /* libPods-AtoDoko.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0903A5B3E1D9C50C6F91A487 /* libPods-AtoDoko.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AtoDoko.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BBD0F7B2A1890D100CF29EB /* AtoDoko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtoDoko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BBD0F7E2A1890D100CF29EB /* AtoDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtoDokoApp.swift; sourceTree = "<group>"; };
-		5BBD0F802A1890D100CF29EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5BBD0F802A1890D100CF29EB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5BBD0F822A1890D300CF29EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BBD0F852A1890D300CF29EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5BBD0F8C2A19B5E800CF29EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5BBD0F8E2A19B72800CF29EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
+		5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUtils.swift; sourceTree = "<group>"; };
+		5BBD0F952A19FCF300CF29EB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		6BC194896EA93A1955BCF011 /* Pods-AtoDoko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AtoDoko.release.xcconfig"; path = "Target Support Files/Pods-AtoDoko/Pods-AtoDoko.release.xcconfig"; sourceTree = "<group>"; };
+		C72B0245BE6EE8F8D9B63BA6 /* Pods-AtoDoko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AtoDoko.debug.xcconfig"; path = "Target Support Files/Pods-AtoDoko/Pods-AtoDoko.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBD0F8D2A19B5E800CF29EB /* CoreLocation.framework in Frameworks */,
+				D518B7757F455E1D168464F7 /* libPods-AtoDoko.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37ED8F8A9FD998B38454EB80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BBD0F8C2A19B5E800CF29EB /* CoreLocation.framework */,
+				0903A5B3E1D9C50C6F91A487 /* libPods-AtoDoko.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5BBD0F722A1890D100CF29EB = {
 			isa = PBXGroup;
 			children = (
 				5BBD0F7D2A1890D100CF29EB /* AtoDoko */,
 				5BBD0F7C2A1890D100CF29EB /* Products */,
+				FB1241DD1B9CD05163BEAAA8 /* Pods */,
+				37ED8F8A9FD998B38454EB80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,8 +79,13 @@
 		5BBD0F7D2A1890D100CF29EB /* AtoDoko */ = {
 			isa = PBXGroup;
 			children = (
+				5BBD0F8E2A19B72800CF29EB /* Info.plist */,
 				5BBD0F7E2A1890D100CF29EB /* AtoDokoApp.swift */,
-				5BBD0F802A1890D100CF29EB /* ContentView.swift */,
+				5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */,
+				5BBD0F802A1890D100CF29EB /* MainView.swift */,
+				5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */,
+				5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */,
+				5BBD0F952A19FCF300CF29EB /* LocationManager.swift */,
 				5BBD0F822A1890D300CF29EB /* Assets.xcassets */,
 				5BBD0F842A1890D300CF29EB /* Preview Content */,
 			);
@@ -67,6 +100,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		FB1241DD1B9CD05163BEAAA8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C72B0245BE6EE8F8D9B63BA6 /* Pods-AtoDoko.debug.xcconfig */,
+				6BC194896EA93A1955BCF011 /* Pods-AtoDoko.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BBD0F892A1890D300CF29EB /* Build configuration list for PBXNativeTarget "AtoDoko" */;
 			buildPhases = (
+				E73EB602A4C81242D3E00E36 /* [CP] Check Pods Manifest.lock */,
 				5BBD0F772A1890D100CF29EB /* Sources */,
 				5BBD0F782A1890D100CF29EB /* Frameworks */,
 				5BBD0F792A1890D100CF29EB /* Resources */,
+				B50FA20F91E803A03051159C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,12 +176,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B50FA20F91E803A03051159C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AtoDoko/Pods-AtoDoko-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AtoDoko/Pods-AtoDoko-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AtoDoko/Pods-AtoDoko-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E73EB602A4C81242D3E00E36 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AtoDoko-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5BBD0F772A1890D100CF29EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BBD0F812A1890D100CF29EB /* ContentView.swift in Sources */,
+				5BBD0F922A19D72F00CF29EB /* GoogleMapView.swift in Sources */,
+				5BBD0F902A19B82600CF29EB /* AppDelegate.swift in Sources */,
+				5BBD0F962A19FCF300CF29EB /* LocationManager.swift in Sources */,
+				5BBD0F812A1890D100CF29EB /* MainView.swift in Sources */,
+				5BBD0F942A19DA2A00CF29EB /* MapUtils.swift in Sources */,
 				5BBD0F7F2A1890D100CF29EB /* AtoDokoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +351,7 @@
 		};
 		5BBD0F8A2A1890D300CF29EB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C72B0245BE6EE8F8D9B63BA6 /* Pods-AtoDoko.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -270,6 +361,8 @@
 				DEVELOPMENT_TEAM = ZUP5BXQQBJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AtoDoko/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地の取得";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -290,6 +383,7 @@
 		};
 		5BBD0F8B2A1890D300CF29EB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BC194896EA93A1955BCF011 /* Pods-AtoDoko.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -299,6 +393,8 @@
 				DEVELOPMENT_TEAM = ZUP5BXQQBJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AtoDoko/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地の取得";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
