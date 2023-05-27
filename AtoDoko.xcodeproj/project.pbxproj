@@ -12,8 +12,6 @@
 		5BBD0F832A1890D300CF29EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD0F822A1890D300CF29EB /* Assets.xcassets */; };
 		5BBD0F862A1890D300CF29EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BBD0F852A1890D300CF29EB /* Preview Assets.xcassets */; };
 		5BBD0F8D2A19B5E800CF29EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBD0F8C2A19B5E800CF29EB /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		5BBD0F902A19B82600CF29EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */; };
-		5BBD0F922A19D72F00CF29EB /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */; };
 		5BBD0F942A19DA2A00CF29EB /* MapUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */; };
 		5BBD0F962A19FCF300CF29EB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F952A19FCF300CF29EB /* LocationManager.swift */; };
 		D518B7757F455E1D168464F7 /* libPods-AtoDoko.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0903A5B3E1D9C50C6F91A487 /* libPods-AtoDoko.a */; };
@@ -28,8 +26,6 @@
 		5BBD0F852A1890D300CF29EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5BBD0F8C2A19B5E800CF29EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5BBD0F8E2A19B72800CF29EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUtils.swift; sourceTree = "<group>"; };
 		5BBD0F952A19FCF300CF29EB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		6BC194896EA93A1955BCF011 /* Pods-AtoDoko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AtoDoko.release.xcconfig"; path = "Target Support Files/Pods-AtoDoko/Pods-AtoDoko.release.xcconfig"; sourceTree = "<group>"; };
@@ -81,9 +77,7 @@
 			children = (
 				5BBD0F8E2A19B72800CF29EB /* Info.plist */,
 				5BBD0F7E2A1890D100CF29EB /* AtoDokoApp.swift */,
-				5BBD0F8F2A19B82600CF29EB /* AppDelegate.swift */,
 				5BBD0F802A1890D100CF29EB /* MainView.swift */,
-				5BBD0F912A19D72F00CF29EB /* GoogleMapView.swift */,
 				5BBD0F932A19DA2A00CF29EB /* MapUtils.swift */,
 				5BBD0F952A19FCF300CF29EB /* LocationManager.swift */,
 				5BBD0F822A1890D300CF29EB /* Assets.xcassets */,
@@ -223,8 +217,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BBD0F922A19D72F00CF29EB /* GoogleMapView.swift in Sources */,
-				5BBD0F902A19B82600CF29EB /* AppDelegate.swift in Sources */,
 				5BBD0F962A19FCF300CF29EB /* LocationManager.swift in Sources */,
 				5BBD0F812A1890D100CF29EB /* MainView.swift in Sources */,
 				5BBD0F942A19DA2A00CF29EB /* MapUtils.swift in Sources */,

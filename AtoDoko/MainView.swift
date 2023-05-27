@@ -37,8 +37,8 @@ struct MainView: View {
                                     latitudinalMeters: Self.range,
                                     longitudinalMeters: Self.range)
                             }
-                        }
-                    }
+                        }   // Task
+                    }   // onSubmit
                     .padding()
                     .background(.white)
                     .cornerRadius(8)
@@ -52,42 +52,13 @@ struct MainView: View {
                     .foregroundColor(.white)
                     .cornerRadius(25.0)
                     .labelStyle(.iconOnly)
-                    //.clipShape(Circle())
                     .symbolVariant(.fill)
-                    .padding(50)
-                }
-                
-            }
-        }
-    }
-}
-
-//struct MapView: View {
-//    @ObservedObject var manager = LocationManager()
-//    @State var trackingMode = MapUserTrackingMode.follow
-//    @State var address: String = "盛岡市"
-//
-////    static var coordinate: CLLocationCoordinate2D
-//    static let delta: CLLocationDegrees = 1 / 111
-//    static let span = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-//
-//    @State var region = MKCoordinateRegion()
-//
-//    var body: some View {
-//        Map(coordinateRegion: $region)
-//            .onAppear {
-//                print(address)
-//                let coordinate = geocodeAddress(address: address)
-//                let range = 1000.0
-//                if let coordinate = coordinate {
-//                    self.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: range, longitudinalMeters: range)
-//                } else {
-//                    self.region = manager.region
-//                    print("current position")
-//                }
-//            }
-//    }
-//}
+                    .padding(40)
+                }   // HStack
+            }   // VStack
+        }   // ZStack
+    }   // body
+}   // MainView
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

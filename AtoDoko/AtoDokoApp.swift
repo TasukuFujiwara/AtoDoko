@@ -13,8 +13,6 @@ import GooglePlaces
 struct AtoDokoApp: App {
     @StateObject private var manager = LocationManager()
     
-    //@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
     var body: some Scene {
         WindowGroup {
             MainView()
