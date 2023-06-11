@@ -16,14 +16,11 @@ struct MainView: View {
 //    @ObservedObject var manager: LocationManager
     @ObservedObject var manager = LocationManager()
     @State var trackingMode = MapUserTrackingMode.follow
-    @State var address: String = "飲食店"
-    @State var subRegion = MKCoordinateRegion(
-        center: subCoordinate,
-        latitudinalMeters: range,
-        longitudinalMeters: range
-    )
+    @State var query: String = ""
+    @State var region = MyMap.region
     
-    @State private var places: [MKMapItem] = []
+    @State private var mapItems: [MKMapItem] = []
+    @State private var routes: [MKRoute] = []
     
     @State var searchView = false
     
@@ -32,30 +29,21 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $subRegion, showsUserLocation: true, annotationItems: places) { place in
-                MapMarker(coordinate: place.placemark.coordinate, tint: Color.blue)
-            }
-//            Map(coordinateRegion: $subRegion, showsUserLocation: true)
+            MyMapView(routes: routes)
                 .edgesIgnoringSafeArea(.all)
+
             VStack {
-                TextField("検索", text: $address)
+                TextField("", text: $query)
                     .onSubmit {
                         Task {
-                            if address != "" {
-                                if let plcs = await searchItems(query: address, region: subRegion) {
-                                    places = plcs
-                                    print(places)
+                            if query != "" {
+                                if let items = await searchItems(query: query, region: region) {
+                                    mapItems = items
                                 }
-                            }
-                            
-//                            if let coordinate = await geocodeAddress(address: address) {
-//                                subRegion = MKCoordinateRegion(
-//                                    center: coordinate,
-//                                    latitudinalMeters: Self.range,
-//                                    longitudinalMeters: Self.range)
-//                            }
+                                routes = await searchMultiRoute(items: mapItems)
+                            }   // if query != ""
                         }   // Task
-                    }   // onSubmit
+                    }   // .onSubmit
                     .padding()
                     .background(.white)
                     .cornerRadius(8)
@@ -63,15 +51,17 @@ struct MainView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    VStack {
-//                        LocationButton(.currentLocation) {
-//                            manager.requestAllowOnceLocationPermission()
-//                        }
-//                        .foregroundColor(.white)
-//                        .cornerRadius(25.0)
-//                        .labelStyle(.iconOnly)
-//                        .symbolVariant(.fill)
-//                        .padding(40)
+                    VStack {                        
+                        LocationButton(.currentLocation) {
+                            manager.requestAllowOnceLocationPermission()
+                        }
+                        .foregroundColor(.white)
+                        .font(.system(size: 35))
+                        .clipShape(Circle())
+                        .labelStyle(.iconOnly)
+                        .symbolVariant(.fill)
+                        .padding()
+                        
                         SearchButton(searchView: $searchView)
                             .padding()
                     }
@@ -104,13 +94,19 @@ struct SearchView: View {
 struct SearchButton: View {
     @Binding var searchView: Bool
     var body: some View {
-        Button(action: {
-            searchView.toggle()
-        }, label: {
-            Image(systemName: "magnifyingglass.circle.fill")
-                .font(.system(size: 80))
-                .clipShape(Circle())
+        ZStack {
+            Circle()
+                .foregroundColor(.blue)
+                .frame(width: 75.0)
+            Button(action: {
+                searchView.toggle()
+            }, label: {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.white)
+                    .font(.system(size: 40))
+                    .clipShape(Circle())
         })
+        }
     }
 }
 
