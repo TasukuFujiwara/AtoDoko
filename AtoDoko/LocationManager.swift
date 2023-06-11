@@ -27,12 +27,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.first else { return }
-        
+
         DispatchQueue.main.async {
             self.region = MKCoordinateRegion(
                 center: latestLocation.coordinate,
                 latitudinalMeters: 1000.0,
-                longitudinalMeters: 1000.0)
+                longitudinalMeters: 1000.0
+            )
+        }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined, .denied, .restricted:
+            manager.requestWhenInUseAuthorization()
+        default:
+            return
         }
     }
     
