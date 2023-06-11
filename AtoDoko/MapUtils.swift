@@ -25,3 +25,29 @@ func searchItems(query: String, region: MKCoordinateRegion) async -> [MKMapItem]
     
     return items
 }
+
+func searchRoute(from source: MKMapItem, to destination: MKMapItem) async -> MKRoute? {
+    let request = MKDirections.Request()
+    
+    request.source = source; request.destination = destination
+    request.transportType = .walking
+    
+    let route = try? await MKDirections(request: request).calculate().routes.first
+    
+    return route
+}
+
+func searchMultiRoute(items: [MKMapItem]) async -> [MKRoute] {
+    var routes: [MKRoute] = []
+    
+    for item in items[1...].shuffled() {
+        if let route = await searchRoute(from: items[0], to: item) {
+            routes.append(route)
+        }
+        if routes.count >= 5 {
+            break
+        }
+    }
+    
+    return routes
+}
