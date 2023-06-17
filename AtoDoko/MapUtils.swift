@@ -37,11 +37,11 @@ func searchRoute(from source: MKMapItem, to destination: MKMapItem) async -> MKR
     return route
 }
 
-func searchMultiRoute(items: [MKMapItem]) async -> [MKRoute] {
+func searchMultiRoute(from source: MKMapItem, items: [MKMapItem]) async -> [MKRoute] {
     var routes: [MKRoute] = []
     
-    for item in items[1...].shuffled() {
-        if let route = await searchRoute(from: items[0], to: item) {
+    for item in items.shuffled() {
+        if let route = await searchRoute(from: source, to: item) {
             routes.append(route)
         }
         if routes.count >= 5 {
