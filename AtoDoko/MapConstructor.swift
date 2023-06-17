@@ -39,8 +39,8 @@ class MyMap: NSObject, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let multiPolyline = overlay as? MKMultiPolyline {
             let renderer = MKMultiPolylineRenderer(multiPolyline: multiPolyline)
-            renderer.strokeColor = .systemBlue
-            renderer.lineWidth = 3.0
+            renderer.strokeColor = .systemTeal
+            renderer.lineWidth = 5.0
             return renderer
         }
         return MKPolylineRenderer(overlay: overlay)
