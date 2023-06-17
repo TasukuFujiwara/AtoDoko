@@ -22,54 +22,88 @@ struct MainView: View {
     @State private var mapItems: [MKMapItem] = []
     @State private var routes: [MKRoute] = []
     
-    @State var searchView = false
+    @State var displayMenu = false
+    @State var displayList = false
     
     static let range: CLLocationDistance = 1000.0
     static let subCoordinate = CLLocationCoordinate2D(latitude: 39.71927, longitude: 141.13337)
     
     var body: some View {
-        ZStack {
-            MyMapView(routes: routes)
-                .edgesIgnoringSafeArea(.all)
-
-            VStack {
-                TextField("", text: $query)
-                    .onSubmit {
-                        Task {
-                            if query != "" {
-                                if let items = await searchItems(query: query, region: region) {
-                                    mapItems = items
-                                }
-                                routes = await searchMultiRoute(items: mapItems)
-                            }   // if query != ""
-                        }   // Task
-                    }   // .onSubmit
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-                Spacer()
-                HStack {
+        NavigationStack {
+            ZStack {
+                MyMapView(routes: routes)
+                    .ignoresSafeArea()
+                
+                VStack {
                     Spacer()
-                    VStack {                        
-                        LocationButton(.currentLocation) {
-                            manager.requestAllowOnceLocationPermission()
-                        }
-                        .foregroundColor(.white)
-                        .font(.system(size: 35))
-                        .clipShape(Circle())
-                        .labelStyle(.iconOnly)
-                        .symbolVariant(.fill)
-                        .padding()
-                        
-                        SearchButton(searchView: $searchView)
+                    
+                    ZStack {
+                        TextField("検索", text: $query)
+                            .onSubmit {
+                                Task {
+                                    if query != "" {
+                                        if let items = await searchItems(query: query, region: region) {
+                                            mapItems = items
+                                        }
+                                    }   // if query != ""
+                                }   // Task
+                                displayList = true
+                            }   // .onSubmit
                             .padding()
+                            .textInputAutocapitalization(.never)
+                            .background(.white)
+                            .cornerRadius(40.0)
+                            .padding(.horizontal, 60)
+                            .offset(x: !displayMenu ? 0 : -30.0, y: !displayMenu ? 0 : -60.0)
+                            .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottomTrailing)
+                        
+                        HStack {
+                            Spacer()
+                            ZStack {
+                                LocationButton(.currentLocation) {
+                                    manager.requestAllowOnceLocationPermission()
+                                }
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 35))
+                                    .clipShape(Circle())
+                                    .labelStyle(.iconOnly)
+                                    .symbolVariant(.fill)
+                                    .offset(y: !displayMenu ? 0 : -130.0)
+                                    .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottom)
+                                
+                                Circle()
+                                    .foregroundColor(.white)
+                                    .frame(width: 80.0)
+                                
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.15)) {
+                                        displayMenu.toggle()
+                                    }
+                                }, label: {
+                                    Image(systemName: "magnifyingglass.circle.fill")
+                                        .font(.system(size: 80.0))
+                                })
+                            }   // ZStack
+                        }   // HStack
+                    }   // ZStack
+                    .padding()
+                }   // VStack
+            }   // ZStack
+            .sheet(isPresented: $displayList) {
+                List {
+                    ForEach(mapItems, id: \.self) { item in
+                        Button(item.name ?? "no Name") {
+                            Task {
+                                routes = await searchMultiRoute(from: item, items: mapItems.filter({ $0 != item }))
+                            }
+                            displayList = false
+                        }
                     }
-                }   // HStack
-            }   // VStack
-        }   // ZStack
-        .fullScreenCover(isPresented: $searchView) {
-            SearchView(searchView: $searchView)
+                }
+                .presentationDetents([.medium, .large])
+                .presentationContentInteraction(.scrolls)
+                .presentationCornerRadius(40)
+            }
         }
     }   // body
 }   // MainView
@@ -92,20 +126,37 @@ struct SearchView: View {
 }
 
 struct SearchButton: View {
-    @Binding var searchView: Bool
+    @Binding var onMenu: Bool
+    @Binding var query: String
+    
     var body: some View {
         ZStack {
-            Circle()
-                .foregroundColor(.blue)
-                .frame(width: 75.0)
-            Button(action: {
-                searchView.toggle()
-            }, label: {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.white)
-                    .font(.system(size: 40))
-                    .clipShape(Circle())
-        })
+            TextField("検索", text: $query)
+                .padding()
+                .textInputAutocapitalization(.never)
+                .background(.white)
+                .cornerRadius(40.0)
+                .padding(.horizontal, 60)
+                .offset(x: !onMenu ? 0 : -30.0, y: !onMenu ? 0 : -60.0)
+                .scaleEffect(!onMenu ? 0 : 1.0, anchor: .bottomTrailing)
+            
+            HStack {
+                Spacer()
+                ZStack {
+                    Circle()
+                        .foregroundColor(.white)
+                        .frame(width: 80.0)
+                    
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            onMenu.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "magnifyingglass.circle.fill")
+                            .font(.system(size: 80.0))
+                    })
+                }
+            }
         }
     }
 }
