@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B2C95C02A2C7C790022495C /* MyMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2C95BF2A2C7C790022495C /* MyMapView.swift */; };
+		5B8E34A42A3D691B004B40A3 /* CommandButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E34A32A3D691B004B40A3 /* CommandButtonView.swift */; };
 		5BA896912A2C5F6A00DF2344 /* MapConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA896902A2C5F6A00DF2344 /* MapConstructor.swift */; };
 		5BBBCA102A2ACFF0003761A9 /* SampleLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBBCA0F2A2ACFF0003761A9 /* SampleLocationSearchView.swift */; };
 		5BBD0F7F2A1890D100CF29EB /* AtoDokoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBD0F7E2A1890D100CF29EB /* AtoDokoApp.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		0903A5B3E1D9C50C6F91A487 /* libPods-AtoDoko.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AtoDoko.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2C95BF2A2C7C790022495C /* MyMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMapView.swift; sourceTree = "<group>"; };
+		5B8E34A32A3D691B004B40A3 /* CommandButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandButtonView.swift; sourceTree = "<group>"; };
 		5BA896902A2C5F6A00DF2344 /* MapConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConstructor.swift; sourceTree = "<group>"; };
 		5BBBCA0F2A2ACFF0003761A9 /* SampleLocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLocationSearchView.swift; sourceTree = "<group>"; };
 		5BBD0F7B2A1890D100CF29EB /* AtoDoko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtoDoko.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +68,7 @@
 				5BBD0F802A1890D100CF29EB /* MainView.swift */,
 				5B2C95BF2A2C7C790022495C /* MyMapView.swift */,
 				5BBBCA0F2A2ACFF0003761A9 /* SampleLocationSearchView.swift */,
+				5B8E34A32A3D691B004B40A3 /* CommandButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8E34A42A3D691B004B40A3 /* CommandButtonView.swift in Sources */,
 				5BBD0F962A19FCF300CF29EB /* LocationManager.swift in Sources */,
 				5BBD0F812A1890D100CF29EB /* MainView.swift in Sources */,
 				5BBBCA102A2ACFF0003761A9 /* SampleLocationSearchView.swift in Sources */,
