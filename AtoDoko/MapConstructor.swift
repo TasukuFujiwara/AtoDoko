@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 class MyMap: NSObject, MKMapViewDelegate {
-//    var manager = LocationManager()
+    var manager = LocationManager()
     
     let map = MKMapView()
     var config = MKStandardMapConfiguration(elevationStyle: .flat)
@@ -34,12 +34,15 @@ class MyMap: NSObject, MKMapViewDelegate {
         map.delegate = self
         map.selectableMapFeatures = .pointsOfInterest
         map.region = Self.region
+//        map.region = manager.region
+        map.showsUserLocation = true
+        map.userTrackingMode = MKUserTrackingMode.follow
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let multiPolyline = overlay as? MKMultiPolyline {
             let renderer = MKMultiPolylineRenderer(multiPolyline: multiPolyline)
-            renderer.strokeColor = .systemTeal
+            renderer.strokeColor = .systemBlue
             renderer.lineWidth = 5.0
             return renderer
         }
