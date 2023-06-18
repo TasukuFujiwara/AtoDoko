@@ -11,8 +11,10 @@ import MapKit
 struct MyMapView: UIViewRepresentable {
     let myMap = MyMap()
     var routes: [MKRoute] = []
+    var annotations: [MKAnnotation] = []
 
-    init(routes: [MKRoute]) {
+    init(annotations: [MKAnnotation], routes: [MKRoute]) {
+        self.annotations = annotations
         self.routes = routes.sorted(by: {$0.distance < $1.distance})
     }
     
@@ -21,6 +23,8 @@ struct MyMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.removeAnnotations(uiView.annotations)
+        uiView.addAnnotations(annotations)
         uiView.removeOverlays(uiView.overlays)
         uiView.delegate = myMap
 
@@ -38,6 +42,6 @@ struct MyMapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MyMapView(routes: [])
+        MyMapView(annotations: [], routes: [])
     }
 }
