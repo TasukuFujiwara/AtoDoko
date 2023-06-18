@@ -13,26 +13,28 @@ extension MKMapItem: Identifiable {
 }
 
 struct MainView: View {
-//    @ObservedObject var manager: LocationManager
+    //@ObservedObject var manager: LocationManager
     @ObservedObject var manager = LocationManager()
     @State var trackingMode = MapUserTrackingMode.follow
     @State var query: String = ""
-    @State var region = MyMap.region
+    @State private var region = MyMap.region
     
     @State private var mapItems: [MKMapItem] = []
+    @State private var annotations: [MKAnnotation] = []
     @State private var routes: [MKRoute] = []
     
     @State var displayMenu = false
     @State var displayList = false
     
-    static let range: CLLocationDistance = 1000.0
-    static let subCoordinate = CLLocationCoordinate2D(latitude: 39.71927, longitude: 141.13337)
+    @State private var leftMode = false
     
     var body: some View {
         NavigationStack {
             ZStack {
-                MyMapView(routes: routes)
+                MyMapView(annotations: annotations , routes: routes)
+                    .blur(radius: !displayMenu ? 0 : 3.0)
                     .ignoresSafeArea()
+                    .disabled(displayMenu)
                 
                 VStack {
                     Spacer()
@@ -45,6 +47,13 @@ struct MainView: View {
                                         if let items = await searchItems(query: query, region: region) {
                                             mapItems = items
                                         }
+                                        annotations = []; routes = []
+                                        for item in mapItems {
+                                            let annotation = MKPointAnnotation()
+                                            annotation.coordinate = item.placemark.coordinate
+                                            annotation.title = item.name
+                                            annotations.append(annotation)
+                                        }
                                     }   // if query != ""
                                 }   // Task
                                 displayList = true
@@ -54,14 +63,23 @@ struct MainView: View {
                             .background(.white)
                             .cornerRadius(40.0)
                             .padding(.horizontal, 60)
-                            .offset(x: !displayMenu ? 0 : -30.0, y: !displayMenu ? 0 : -60.0)
-                            .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottomTrailing)
+                            .offset(
+                                x: !displayMenu ? 0 : !leftMode ? -30.0 : 30.0,
+                                y: !displayMenu ? 0 : -60.0
+                            )
+                            .scaleEffect(
+                                !displayMenu ? 0 : 1.0,
+                                anchor: !leftMode ? .bottomTrailing : .bottomLeading
+                            )
                         
                         HStack {
-                            Spacer()
+                            if !leftMode { Spacer() }
                             ZStack {
                                 LocationButton(.currentLocation) {
                                     manager.requestAllowOnceLocationPermission()
+                                    withAnimation(.easeOut(duration: 0.15)) {
+                                        displayMenu = false
+                                    }
                                 }
                                     .foregroundColor(.white)
                                     .font(.system(size: 35))
@@ -71,32 +89,63 @@ struct MainView: View {
                                     .offset(y: !displayMenu ? 0 : -130.0)
                                     .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottom)
                                 
-                                Circle()
-                                    .foregroundColor(.white)
-                                    .frame(width: 80.0)
-                                
-                                Button(action: {
-                                    withAnimation(.easeInOut(duration: 0.15)) {
-                                        displayMenu.toggle()
-                                    }
-                                }, label: {
-                                    Image(systemName: "magnifyingglass.circle.fill")
-                                        .font(.system(size: 80.0))
-                                })
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.white)
+                                        .frame(width: 70.0)
+                                    
+                                    Button(action: {
+                                        leftMode.toggle()
+                                    }, label: {
+                                        Image(systemName: !leftMode ? "circle.lefthalf.fill" : "circle.righthalf.fill")
+                                    })
+                                }
+                                    .font(.system(size: 80.0))
+                                    .offset(
+                                        x: !displayMenu ? 0 : !leftMode ? -100.0 : 100.0,
+                                        y: !displayMenu ? 0 : 60.0
+                                    )
+                                    .scaleEffect(
+                                        !displayMenu ? 0 : 1.0,
+                                        anchor: !leftMode ? .topTrailing : .topLeading
+                                    )
+
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.white)
+                                        .frame(width: 70.0)
+                                    
+                                    Button(action: {
+                                        withAnimation(.easeInOut(duration: 0.15)) {
+                                            displayMenu.toggle()
+                                        }
+                                    }, label: {
+                                        Image(systemName: "magnifyingglass.circle.fill")
+                                            .font(.system(size: 80.0))
+                                    })
+                                }
                             }   // ZStack
+                            if leftMode { Spacer() }
                         }   // HStack
                     }   // ZStack
-                    .padding()
+                    .padding(!leftMode ? .trailing : .leading, 10.0)
+                    .padding(.bottom, 70.0)
                 }   // VStack
             }   // ZStack
             .sheet(isPresented: $displayList) {
-                List {
+                List {                    
                     ForEach(mapItems, id: \.self) { item in
-                        Button(item.name ?? "no Name") {
-                            Task {
-                                routes = await searchMultiRoute(from: item, items: mapItems.filter({ $0 != item }))
+                        HStack {
+                            Button(item.name ?? "no Name") {
+                                Task {
+                                    routes = await searchMultiRoute(from: item, items: mapItems.filter({ $0 != item }))
+                                }
+                                displayList = false
+                                displayMenu = false
                             }
-                            displayList = false
+                            Spacer()
+                            Text("5km")
+                                .foregroundColor(.gray)
                         }
                     }
                 }
@@ -107,59 +156,6 @@ struct MainView: View {
         }
     }   // body
 }   // MainView
-
-struct SearchView: View {
-    @Binding var searchView: Bool
-    
-    var body: some View {
-        NavigationStack {
-            Text("search View")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("キャンセル") {
-                        searchView.toggle()
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct SearchButton: View {
-    @Binding var onMenu: Bool
-    @Binding var query: String
-    
-    var body: some View {
-        ZStack {
-            TextField("検索", text: $query)
-                .padding()
-                .textInputAutocapitalization(.never)
-                .background(.white)
-                .cornerRadius(40.0)
-                .padding(.horizontal, 60)
-                .offset(x: !onMenu ? 0 : -30.0, y: !onMenu ? 0 : -60.0)
-                .scaleEffect(!onMenu ? 0 : 1.0, anchor: .bottomTrailing)
-            
-            HStack {
-                Spacer()
-                ZStack {
-                    Circle()
-                        .foregroundColor(.white)
-                        .frame(width: 80.0)
-                    
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            onMenu.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "magnifyingglass.circle.fill")
-                            .font(.system(size: 80.0))
-                    })
-                }
-            }
-        }
-    }
-}
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
