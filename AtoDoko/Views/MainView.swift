@@ -75,19 +75,19 @@ struct MainView: View {
                         HStack {
                             if !leftMode { Spacer() }
                             ZStack {
-                                LocationButton(.currentLocation) {
-                                    manager.requestAllowOnceLocationPermission()
-                                    withAnimation(.easeOut(duration: 0.15)) {
-                                        displayMenu = false
-                                    }
-                                }
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 35))
-                                    .clipShape(Circle())
-                                    .labelStyle(.iconOnly)
-                                    .symbolVariant(.fill)
-                                    .offset(y: !displayMenu ? 0 : -130.0)
-                                    .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottom)
+//                                LocationButton(.currentLocation) {
+//                                    manager.requestAllowOnceLocationPermission()
+//                                    withAnimation(.easeOut(duration: 0.15)) {
+//                                        displayMenu = false
+//                                    }
+//                                }
+//                                    .foregroundColor(.white)
+//                                    .font(.system(size: 35))
+//                                    .clipShape(Circle())
+//                                    .labelStyle(.iconOnly)
+//                                    .symbolVariant(.fill)
+//                                    .offset(y: !displayMenu ? 0 : -130.0)
+//                                    .scaleEffect(!displayMenu ? 0 : 1.0, anchor: .bottom)
                                 
                                 ZStack {
                                     Circle()
